@@ -1,0 +1,46 @@
+version: "3.8"
+
+services:
+  mongodb:
+    image: mongo:6-jammy
+    container_name: silkverse-mongodb
+    restart: always
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_DATABASE: silkverse
+    volumes:
+      - mongo-data:/data/db
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: silkverse-backend
+    restart: always
+    ports:
+      - "5001:5000"
+    environment:
+      PORT: 5000
+      MONGO_URI: mongodb://mongodb:27017/silkverse
+      JWT_SECRET: silkverse_super_secret_jwt_key_2026
+      CLIENT_URL: http://localhost:3000
+    depends_on:
+      - mongodb
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: silkverse-frontend
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      PORT: 3000
+      NEXT_PUBLIC_API_URL: http://backend:5000/api
+    depends_on:
+      - backend
+
+volumes:
+  mongo-data:

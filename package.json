@@ -1,0 +1,24 @@
+{
+  "name": "silkverse",
+  "version": "1.0.0",
+  "description": "SilkVerse - Authentic Handloom Pure Silk Saree E-Commerce Platform",
+  "scripts": {
+    "dev:backend": "npm run dev --prefix backend",
+    "dev:frontend": "npm run dev --prefix frontend",
+    "dev": "npm run dev:frontend",
+    "build": "npm run build --prefix frontend",
+    "seed": "npm run seed --prefix backend",
+    "test": "node scratch/test_routes.js"
+  },
+  "keywords": [
+    "silkverse",
+    "ecommerce",
+    "sarees",
+    "handloom",
+    "nextjs",
+    "express",
+    "mongodb"
+  ],
+  "author": "SilkVerse Team",
+  "license": "MIT"
+}

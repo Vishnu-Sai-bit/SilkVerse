@@ -1,0 +1,194 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Poppins', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-serif: 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
+  --font-playfair: 'Playfair Display', Georgia, serif;
+}
+
+:root {
+  /* Official Brand Guidelines Colors (SilkVerse Design Book Page 02 & Page 10) */
+  --primary: #6D001A;        /* Rich Maroon */
+  --primary-hover: #520013;
+  --secondary: #D4AF37;      /* Royal Gold */
+  --secondary-hover: #B58A32;
+  --royal-gold: #D4AF37;
+
+  /* Page 10: Master Design System & UI Elements Colors */
+  --royal-maroon: #5B0D16;
+  --antique-gold: #D4AF37;
+  --silk-ivory: #FFF7EE;
+  --warm-beige: #F5EDE1;
+  --deep-charcoal: #231F20;
+  --forest-green: #1E3D2F;
+  --soft-taupe: #CDBFAE;
+  --muted-rose: #CF8A86;
+
+  --ivory: #FFF8F0;          /* Ivory */
+  --dark-brown: #2D2A26;     /* Dark Brown */
+  --light-grey: #E8E4DF;     /* Light Grey */
+  --white: #FFFFFF;
+
+  --background: #FFF8F0;
+  --foreground: #2D2A26;
+
+  --maroon: #6D001A;
+  --gold: #D4AF37;
+  --brown: #2D2A26;
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), 'Poppins', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, .font-serif {
+  font-family: var(--font-serif), 'Cormorant Garamond', Georgia, serif;
+  letter-spacing: -0.01em;
+}
+
+/* Luxury Silk Card & Image Elevations */
+.silk-card {
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.35s ease;
+}
+
+.silk-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 32px -8px rgba(122, 31, 43, 0.12), 0 4px 12px rgba(201, 162, 39, 0.08);
+}
+
+.silk-image-zoom {
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.silk-card:hover .silk-image-zoom {
+  transform: scale(1.06);
+}
+
+/* Page 12 Micro-Interactions Keyframes */
+@keyframes heartPop {
+  0% { transform: scale(1); }
+  45% { transform: scale(1.32); }
+  70% { transform: scale(0.92); }
+  100% { transform: scale(1); }
+}
+
+.animate-heart-pop {
+  animation: heartPop 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes bounceCheck {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+.animate-bounce-check {
+  animation: bounceCheck 0.4s ease-in-out;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.animate-shimmer {
+  background: linear-gradient(90deg, #F5EDE1 25%, #FFF7EE 50%, #F5EDE1 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.8s infinite;
+}
+
+@keyframes pulseDots {
+  0%, 80%, 100% { opacity: 0.3; transform: scale(0.8); }
+  40% { opacity: 1; transform: scale(1.2); }
+}
+
+.animate-dot-1 { animation: pulseDots 1.4s infinite ease-in-out; }
+.animate-dot-2 { animation: pulseDots 1.4s infinite ease-in-out 0.2s; }
+.animate-dot-3 { animation: pulseDots 1.4s infinite ease-in-out 0.4s; }
+
+/* Page 15: WCAG 2.1 AA Focus Indicators & Accessibility */
+:focus-visible {
+  outline: 2px solid #D4AF37 !important;
+  outline-offset: 3px !important;
+}
+
+/* Reduced Motion Preference (Vestibular Safety) */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Hide scrollbar across all browsers */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* =========================================================
+   Royal Kanchipuram Silk Curtain Opening Ceremony Keyframes
+   ========================================================= */
+@keyframes mandalaSpin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes mandalaSpinReverse {
+  0% { transform: rotate(360deg); }
+  100% { transform: rotate(0deg); }
+}
+
+@keyframes tasselSwing {
+  0%, 100% { transform: rotate(-3deg); }
+  50% { transform: rotate(3deg); }
+}
+
+@keyframes goldSparkleFloat {
+  0%, 100% {
+    opacity: 0.15;
+    transform: translateY(0px) scale(0.75);
+  }
+  50% {
+    opacity: 0.95;
+    transform: translateY(-14px) scale(1.25);
+  }
+}
+
+@keyframes silkSheenSweep {
+  0% { transform: translateX(-120%) skewX(-18deg); }
+  100% { transform: translateX(220%) skewX(-18deg); }
+}
+
+.animate-mandala-slow {
+  animation: mandalaSpin 24s linear infinite;
+}
+
+.animate-mandala-reverse {
+  animation: mandalaSpinReverse 18s linear infinite;
+}
+
+.animate-tassel-swing {
+  transform-origin: top center;
+  animation: tasselSwing 2.4s ease-in-out infinite;
+}
+
+.animate-silk-sheen {
+  animation: silkSheenSweep 2.2s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+}

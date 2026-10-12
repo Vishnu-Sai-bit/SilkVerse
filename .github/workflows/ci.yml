@@ -1,0 +1,37 @@
+name: SilkVerse CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build-and-verify:
+    name: Verify Backend & Next.js Production Build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install Backend Dependencies & Verify Syntax
+        working-directory: ./backend
+        run: |
+          npm install --no-audit --no-fund
+          node --check src/app.js
+          node --check src/seed.js
+
+      - name: Install Frontend Dependencies, Typecheck & Build
+        working-directory: ./frontend
+        env:
+          NEXT_PUBLIC_API_URL: http://localhost:5001/api
+        run: |
+          npm install --no-audit --no-fund
+          npx tsc --noEmit
+          npm run build
